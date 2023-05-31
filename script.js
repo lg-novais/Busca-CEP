@@ -38,9 +38,30 @@ function btcAtualizado() {
       console.log(bitcoin);
     });
 }
-btcAtualizado()
-setInterval(btcAtualizado, 30000);
+btcAtualizado();
+// setInterval(btcAtualizado, 30000);
 
 // Utilizando a API https://api.chucknorris.io/jokes/random
 // retorne uma piada randomica do chucknorris, toda vez que
 // clicar em próxima
+const spanPiada = document.querySelector('.piadaCN')
+const btnPiada = document.querySelector('.btnPiada')
+
+function proximaPiada(event){
+event.preventDefault()
+const piada = spanPiada.value
+piadas()
+}
+
+function piadas(){
+  fetch("https://api.chucknorris.io/jokes/random")
+  .then((response) => {
+    return response.json();
+  })
+  .then((text) => {
+    const piada = text.value;
+    spanPiada.innerText = piada
+  });
+}
+piadas()
+btnPiada.addEventListener('click', proximaPiada)
